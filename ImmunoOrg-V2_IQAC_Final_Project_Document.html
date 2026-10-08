@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ImmunoOrg-V2 IQAC Final Project Document</title>
+  <style>
+    @page { margin: 0.8in; }
+    body { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.35; color: #111; }
+    h1, h2, h3 { font-family: Arial, sans-serif; line-height: 1.15; }
+    h1 { font-size: 18pt; text-align: center; margin-top: 0.2in; }
+    h2 { font-size: 15pt; margin-top: 0.28in; border-bottom: 1px solid #999; padding-bottom: 4px; }
+    h3 { font-size: 13pt; margin-top: 0.18in; }
+    .cover { text-align: center; page-break-after: always; }
+    .cover h1 { font-family: "Times New Roman", serif; font-size: 18pt; }
+    .subtitle { margin: 0.18in 0; }
+    .large-gap { margin-top: 0.35in; }
+    table { border-collapse: collapse; width: 100%; margin: 0.12in 0; }
+    th, td { border: 1px solid #777; padding: 6px; vertical-align: top; }
+    th { background: #efefef; font-weight: bold; }
+    ul, ol { margin-top: 4px; }
+    .small { font-size: 10.5pt; }
+    .center { text-align: center; }
+    .page-break { page-break-before: always; }
+    code { font-family: "Courier New", monospace; font-size: 10.5pt; }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <h1>A Real-time Research Project / Societal Related Project</h1>
+    <div class="subtitle">Report on</div>
+    <h1>ImmunoOrg-V2: A Proactive Endpoint Detection and Response (EDR) Platform for Real-Time Threat Mitigation and Security Observability</h1>
+    <p class="large-gap">Submitted in partial fulfillment of requirements for B.Tech II Year II Semester course</p>
+    <p class="large-gap">By</p>
+    <p>
+      A. Pranav Adithya - 24BD1A6666<br>
+      K. Supratheek - 24BD1A666X<br>
+      J. Sreejan Jalagam - 24BD1A667Q<br>
+      K. Sai Pranav - 24BD1A6671<br>
+      A. Sanjana - 24BD1A6664
+    </p>
+    <p class="large-gap">Under the guidance of</p>
+    <p><strong>Ms. E. Harismitha</strong><br>Project Mentor, Department of CSE (Artificial Intelligence & Machine Learning)</p>
+    <p class="large-gap"><strong>Team:</strong> G-1077, Team Kanyarasi<br>
+    <strong>Course:</strong> KR24_RTRP_II-II_2026</p>
+    <p class="large-gap"><strong>KESHAV MEMORIAL INSTITUTE OF TECHNOLOGY</strong><br>
+    (An Autonomous Institution)<br>
+    Accredited by NBA & NAAC, Approved by AICTE, Affiliated to JNTUH<br>
+    Narayanaguda, Hyderabad, Telangana-29<br>
+    2025-26</p>
+  </section>
+
+  <h2>Abstract</h2>
+  <p>ImmunoOrg-V2 is a next-generation, proactive Endpoint Detection and Response (EDR) ecosystem designed to provide comprehensive system-wide security monitoring and automated threat mitigation. Addressing the limitations of traditional, reactive antivirus solutions, ImmunoOrg-V2 utilizes a distributed architecture featuring a high-performance Rust-based security agent and a centralized Node.js command center. The system implements real-time File Integrity Monitoring (FIM), suspicious process detection, and stateful cross-telemetry correlation to identify sophisticated threats such as ransomware, unauthorized system modifications, and lateral movement attempts. The platform provides administrators with a premium, command-center style dashboard for real-time fleet management, interactive remote remediation (including process termination), and historical threat hunting. Built with a modern tech stack including Rust, Node.js, Redis, and React, ImmunoOrg-V2 ensures high performance, scalability, and stealthy operation, making it a robust solution for modern organizational security.</p>
+
+  <h2>1. Introduction</h2>
+  <p>As cyber threats evolve in complexity and speed, organizational security requires more than just passive perimeter defenses. Endpoint Detection and Response (EDR) has become a critical component of modern cybersecurity, providing visibility into the activities occurring on individual devices across a network. Traditional solutions often suffer from high resource consumption, lack of real-time response capabilities, and complex deployment workflows. ImmunoOrg-V2 is designed as a streamlined, high-performance EDR ecosystem that combines the efficiency of Rust for low-level system monitoring with the flexibility of Node.js and React for centralized management and visualization. The project focuses on providing real-time observability and proactive mitigation to minimize the impact of security incidents.</p>
+
+  <h2>2. Problem Statement</h2>
+  <p>Modern organizations face several security challenges:
+    <ul>
+      <li><strong>Signature-Based Limitations:</strong> Traditional antivirus often fails to detect zero-day exploits and polymorphic malware.</li>
+      <li><strong>Lack of Visibility:</strong> Administrators often lack real-time insights into file-level changes and process activities across diverse endpoints.</li>
+      <li><strong>Delayed Response:</strong> Manual intervention is often too slow to prevent the spread of fast-acting threats like ransomware.</li>
+      <li><strong>Agent Overhead:</strong> Security agents that consume excessive system resources can hinder user productivity and may be intentionally disabled.</li>
+      <li><strong>Information Silos:</strong> Fragmented security tools make it difficult to correlate events and perform comprehensive threat hunting.</li>
+    </ul>
+    ImmunoOrg-V2 addresses these by providing a unified, low-overhead, and real-time monitoring and response platform.
+  </p>
+
+  <h2>3. Objectives</h2>
+  <ul>
+    <li>Develop a high-performance, stealthy security agent in Rust for real-time system-wide monitoring.</li>
+    <li>Implement a centralized Node.js backend for telemetry processing, alert generation, and fleet management.</li>
+    <li>Build an interactive "Cyber Command Center" dashboard using React for real-time visualization of network-wide security state.</li>
+    <li>Enable real-time File Integrity Monitoring (FIM) across critical OS directories.</li>
+    <li>Provide remote remediation capabilities, such as the ability to terminate suspicious processes directly from the dashboard.</li>
+    <li>Implement automated threat mitigation (SOAR) workflows to isolate compromised endpoints.</li>
+    <li>Establish a persistent historical telemetry database for advanced threat hunting and incident investigation.</li>
+  </ul>
+
+  <h2>4. End Users and Stakeholders</h2>
+  <table>
+    <tr><th>User</th><th>Role in System</th><th>Benefits</th></tr>
+    <tr><td>Security Analysts / SOC Team</td><td>Monitor alerts, perform threat hunting, execute remote remediation, and analyze incident history.</td><td>Real-time visibility, interactive controls, unified dashboard, and historical data for investigation.</td></tr>
+    <tr><td>IT Administrators</td><td>Deploy agents, manage fleet status, and ensure endpoint health and compliance.</td><td>Streamlined deployment, stealthy operation, and easy fleet management.</td></tr>
+    <tr><td>Organization / IQAC</td><td>Requires verifiable security posture, audit logs for compliance, and protection of intellectual property.</td><td>Reduced risk of data breaches, automated mitigation, and comprehensive security audit trails.</td></tr>
+  </table>
+
+  <h2>5. Scope</h2>
+  <p>ImmunoOrg-V2 covers the entire lifecycle of endpoint security from agent deployment and registration to real-time monitoring, threat detection, automated mitigation, and post-incident investigation. It includes a cross-platform Rust agent (macOS, Windows, Linux), a scalable Node.js backend with Redis queueing, and a React-based frontend dashboard. The system focuses on file system integrity, process management, and network-wide fleet visibility. Future versions aim to include kernel-level monitoring, behavioral AI-based detection, and integration with external SIEM/SOAR platforms.</p>
+
+  <h2>6. Complete Feature List</h2>
+  <h3>6.1 Agent Identity and Fleet Management</h3>
+  <ul>
+    <li><strong>Deterministic Agent Identity:</strong> Automatically registers endpoints using hostname and hardware identifiers to prevent duplicate entries.</li>
+    <li><strong>Real-Time Fleet Status:</strong> Monitors the heartbeat and connection state of all deployed agents across the network.</li>
+    <li><strong>Stealth Execution:</strong> The Rust agent is designed to run silently as a background daemon, minimizing user interference.</li>
+    <li><strong>Dynamic Registration:</strong> New agents automatically register with the command center upon first launch, facilitating rapid deployment.</li>
+  </ul>
+
+  <h3>6.2 System-Wide File Integrity Monitoring (FIM)</h3>
+  <ul>
+    <li><strong>Real-Time Observation:</strong> Continuously monitors critical OS directories (Downloads, Desktop, Documents, System folders) for file changes.</li>
+    <li><strong>Event Tracking:</strong> Logs file creation, modification, deletion, and permission changes with precise timestamps.</li>
+    <li><strong>Noise Filtering:</strong> Implements intelligent filters to exclude irrelevant system logs and cache files, focusing on actionable security events.</li>
+    <li><strong>Path-Aware Severity:</strong> Assigns higher risk scores to changes in sensitive system directories.</li>
+  </ul>
+
+  <h3>6.3 Suspicious Process Detection and Control</h3>
+  <ul>
+    <li><strong>Live PID Surfacing:</strong> Real-time listing of active processes on monitored endpoints.</li>
+    <li><strong>Remote Process Kill:</strong> Administrators can remotely terminate any process on an endpoint directly from the dashboard to stop active threats.</li>
+    <li><strong>Banned Process Flagging:</strong> Automatically alerts when restricted or known-malicious applications are detected.</li>
+    <li><strong>Process-File Correlation:</strong> Links file system changes to the specific processes responsible for the action.</li>
+  </ul>
+
+  <h3>6.4 Intelligent Security Detection and SOAR</h3>
+  <ul>
+    <li><strong>Suspicious Extension Flagging:</strong> Automatically detects and alerts on malicious file extensions (e.g., `.encrypted`, `.sh`, `.exe` in sensitive paths).</li>
+    <li><strong>Ransomware Detection:</strong> Identifies rapid, high-volume file modification patterns characteristic of ransomware attacks.</li>
+    <li><strong>Automated Mitigation:</strong> Triggers "isolate" commands for critical threats to disconnect compromised devices from the network.</li>
+    <li><strong>Stateful Correlation:</strong> Correlates multiple telemetry events (e.g., file change + high CPU + suspicious process) to identify complex attacks.</li>
+  </ul>
+
+  <h3>6.5 Command Center Dashboard and Analytics</h3>
+  <ul>
+    <li><strong>"Cyber Command Center" UI:</strong> A high-end, reactive dashboard with glassmorphism aesthetics and dynamic animations for enhanced engagement.</li>
+    <li><strong>Real-Time Alerts:</strong> Surfaces critical security events instantly via Socket.io for immediate analyst attention.</li>
+    <li><strong>Historical Threat Hunting:</strong> Searchable interface for querying the persistent telemetry database for past events.</li>
+    <li><strong>Interactive Network Graph:</strong> Visualizes the relationship between the technical network nodes and the organizational structure.</li>
+  </ul>
+
+  <h3>6.6 Testing and Simulation</h3>
+  <ul>
+    <li><strong>Ransomware Simulator:</strong> Built-in tool to safely simulate ransomware behavior to test and validate the system's detection capabilities.</li>
+    <li><strong>Agent Health Monitoring:</strong> Detailed logging of agent startup, communication, and error states for troubleshooting.</li>
+  </ul>
+
+  <h2>7. Technology Stack</h2>
+  <table>
+    <tr><th>Layer</th><th>Technologies</th><th>Purpose</th></tr>
+    <tr><td>Security Agent</td><td>Rust, Tokio (Async), Notify (FIM), Sysinfo (Process), Reqwest (API)</td><td>High-performance, low-level system monitoring and stealthy operation.</td></tr>
+    <tr><td>Backend Server</td><td>Node.js, Express, Socket.io, Redis, Better-SQLite3</td><td>Centralized telemetry processing, real-time communication, and persistent storage.</td></tr>
+    <tr><td>Frontend UI</td><td>React.js, Vite, CSS (Custom Design System), Lucide-React</td><td>Modern, responsive dashboard for fleet management and threat visualization.</td></tr>
+    <tr><td>Event Queueing</td><td>Redis</td><td>Handles high-volume telemetry data asynchronously to ensure backend stability.</td></tr>
+    <tr><td>Persistent Database</td><td>SQLite (Better-SQLite3)</td><td>Stores agent registration, historical telemetry, and security logs.</td></tr>
+    <tr><td>Deployment</td><td>Shell scripts (start.sh, uninstall_agent.sh)</td><td>Automated agent installation and maintenance.</td></tr>
+  </table>
+
+  <h2>8. Architecture</h2>
+  <p>ImmunoOrg-V2 follows a distributed client-server architecture designed for high throughput and reliability. The <strong>Rust Agent</strong> operates on each endpoint, collecting telemetry and executing remediation commands. Telemetry is sent to the <strong>Node.js Backend</strong> via a REST API, where it is placed into a <strong>Redis Queue</strong>. A dedicated <strong>Telemetry Worker</strong> processes the queue, performing threat detection and persisting data to <strong>SQLite</strong>. Alerts are broadcast to the <strong>React Frontend</strong> in real-time using <strong>Socket.io</strong>, allowing analysts to interact with the system instantly.</p>
+
+  <h2>9. Database and Storage Design</h2>
+  <table>
+    <tr><th>Table</th><th>Key Fields</th><th>Description</th></tr>
+    <tr><td><code>agents</code></td><td><code>id (PK)</code>, <code>hostname</code>, <code>os_name</code>, <code>status</code>, <code>last_seen</code></td><td>Master record for endpoint registration and health state.</td></tr>
+    <tr><td><code>telemetry</code></td><td><code>id (PK)</code>, <code>agent_id</code>, <code>timestamp</code>, <code>event_type</code>, <code>file_path</code>, <code>file_hash</code>, <code>cpu_usage</code>, <code>memory_usage</code>, <code>pid</code></td><td>High-resolution event log for file system and process activities.</td></tr>
+    <tr><td><code>alerts</code></td><td><code>id (PK)</code>, <code>agent_id</code>, <code>timestamp</code>, <code>severity</code>, <code>alert_type</code>, <code>description</code></td><td>Persistent log of detected security incidents and automated responses.</td></tr>
+    <tr><td><code>agent_history</code></td><td><code>id (PK)</code>, <code>agent_id</code>, <code>status</code>, <code>timestamp</code></td><td>Audit trail of agent state transitions (e.g., Online -> Isolated).</td></tr>
+    <tr><td>Redis Queue</td><td><code>telemetry_payload</code></td><td>Asynchronous buffer for high-volume ingestion.</td></tr>
+  </table>
+
+  <h2>10. Core Workflows</h2>
+  <h3>10.1 Agent Deployment and Registration</h3>
+  <ol>
+    <li>Agent binary is deployed to the endpoint and executed (often via `start.sh`).</li>
+    <li>Agent gathers system metadata (hostname, OS) and sends a registration request to the backend.</li>
+    <li>Backend checks for existing identity; if new, it creates a record in the `agents` table.</li>
+    <li>Agent begins monitoring the file system and process list based on its configuration.</li>
+    <li>Dashboard updates in real-time to show the new agent as "Online".</li>
+  </ol>
+
+  <h3>10.2 Real-Time Monitoring and Alerting</h3>
+  <ol>
+    <li>Rust agent detects a file modification in a critical directory (e.g., `Documents`).</li>
+    <li>Agent sends telemetry data to the backend API.</li>
+    <li>Backend adds the event to the Redis queue.</li>
+    <li>Telemetry worker analyzes the event; if it matches a threat pattern (e.g., `.encrypted` extension), it generates an alert.</li>
+    <li>Alert is stored in the database and sent to the React dashboard via Socket.io.</li>
+    <li>Security analyst sees the flashing alert and the affected node on the dashboard.</li>
+  </ol>
+
+  <h3>10.3 Remote Remediation</h3>
+  <ol>
+    <li>Analyst selects an alert or an endpoint on the dashboard.</li>
+    <li>Analyst views the active process list for that endpoint.</li>
+    <li>Analyst identifies a malicious PID and clicks "Terminate".</li>
+    <li>Dashboard sends a command request to the backend.</li>
+    <li>Backend forwards the command to the specific Rust agent (via long-polling or dedicated socket).</li>
+    <li>Rust agent executes the process kill and confirms success to the backend.</li>
+  </ol>
+
+  <h3>10.4 Threat Hunting and Investigation</h3>
+  <ol>
+    <li>Security analyst opens the "Threat Hunting" tab on the command center.</li>
+    <li>System queries the SQLite database for historical alerts and telemetry logs.</li>
+    <li>Analyst filters events by agent, severity, or timeframe to identify attack patterns.</li>
+    <li>Analyst inspects the SHA-256 hashes of modified files to compare against known malware databases.</li>
+    <li>Analyst reviews the agent's connection history to identify periods of suspicious offline activity.</li>
+  </ol>
+
+  <h2>11. Functional Requirements</h2>
+  <table>
+    <tr><th>ID</th><th>Requirement</th></tr>
+    <tr><td>FR-1</td><td><b>Deterministic Registration:</b> System shall register agents using hostnames to maintain identity across reboots.</td></tr>
+    <tr><td>FR-2</td><td><b>Real-Time FIM:</b> Agent shall monitor modifications in sensitive OS paths (/etc, /tmp, Downloads, Desktop).</td></tr>
+    <tr><td>FR-3</td><td><b>Process Visibility:</b> Agent shall surface PIDs and application bundle information for all active processes.</td></tr>
+    <tr><td>FR-4</td><td><b>Asynchronous Ingestion:</b> Backend shall use Redis to decouple telemetry reception from processing logic.</td></tr>
+    <tr><td>FR-5</td><td><b>Stateful Detection:</b> Detection engine shall correlate process starts with subsequent file modifications.</td></tr>
+    <tr><td>FR-6</td><td><b>Intelligent Severity:</b> System shall escalate severity based on directory sensitivity (e.g., /etc vs Downloads).</td></tr>
+    <tr><td>FR-7</td><td><b>Remote Remediation:</b> Dashboard shall enable one-click process termination and endpoint isolation.</td></tr>
+    <tr><td>FR-8</td><td><b>Auto-Mitigation (SOAR):</b> System shall automatically isolate endpoints upon detection of critical threats.</td></tr>
+    <tr><td>FR-9</td><td><b>Historical Persistence:</b> All alerts and telemetry shall be stored in a searchable SQLite database.</td></tr>
+    <tr><td>FR-10</td><td><b>Cyber Command UI:</b> Frontend shall provide a real-time, low-latency visualization of the entire fleet.</td></tr>
+  </table>
+
+  <h2>12. Non-Functional Requirements</h2>
+  <table>
+    <tr><th>Category</th><th>Requirement</th></tr>
+    <tr><td>Security</td><td>Secure communication between agent and backend; authenticated access to the dashboard.</td></tr>
+    <tr><td>Performance</td><td>Rust agent must have minimal CPU/RAM footprint (<1% idle); backend must handle high telemetry bursts.</td></tr>
+    <tr><td>Reliability</td><td>Redis queueing to prevent data loss during backend load; SQLite for robust local storage.</td></tr>
+    <tr><td>Scalability</td><td>Architecture supports hundreds of concurrent agents through asynchronous processing.</td></tr>
+    <tr><td>Usability</td><td>Intuitive, high-fidelity UI for rapid incident response and clear observability.</td></tr>
+    <tr><td>Maintainability</td><td>Modular codebase with clear separation between agent logic, backend processing, and frontend UI.</td></tr>
+  </table>
+
+  <h3>13.1 Rust Security Agent</h3>
+  <p>The agent is built with <strong>Rust</strong> for memory safety and zero-cost abstractions. It utilizes the <code>notify</code> crate for kernel-level file system events and <code>sysinfo</code> for process telemetry. A local JSONL-based queue ensures data persistence during network outages. The agent calculates SHA-256 hashes for modified files to facilitate forensic analysis.</p>
+
+  <h3>13.2 Intelligent Detection Engine</h3>
+  <p>The detection logic in Phase 2 moves beyond simple pattern matching. It implements a <strong>Stateful Correlation Window</strong>: if a suspicious process (e.g., <code>nc</code>, <code>curl</code>, or <code>python</code>) is started followed by a file modification in a system-critical directory (like <code>/etc</code> or <code>/usr/bin</code>) within 60 seconds, the system triggers a <strong>CRITICAL Correlated Attack</strong> alert. Path-aware severity ensures that user-level changes (Downloads) are handled differently than system-level tampering.</p>
+
+  <h3>13.3 Automated Mitigation (SOAR)</h3>
+  <p>The <strong>Mitigation Service</strong> acts as an automated security orchestration layer. When a critical threat is flagged by the engine, the system immediately dispatches an <code>isolate</code> command to the agent's command queue. This "Auto-Isolate" feature reduces the Mean Time to Respond (MTTR) from minutes to milliseconds, effectively neutralizing fast-acting threats like ransomware before they can spread.</p>
+
+  <h3>13.4 Real-Time Command Center</h3>
+  <p>The frontend uses <strong>React</strong> with <strong>Socket.io</strong> to maintain a live connection to the backend. The dashboard utilizes custom glassmorphism CSS, providing a high-fidelity "Cyber Command" experience. It supports recursive process group termination, allowing analysts to kill not just a single PID, but an entire application bundle (e.g., Chrome and its helper processes).</p>
+
+  <h2>14. Testing Strategy</h2>
+  <table>
+    <tr><th>Test Area</th><th>Test Cases</th><th>Expected Result</th></tr>
+    <tr><td>Agent Registration</td><td>Deploy agent on new machine.</td><td>Agent appears correctly on dashboard with hostname.</td></tr>
+    <tr><td>FIM Detection</td><td>Create/Delete files in monitored folders.</td><td>Events appear in telemetry log and dashboard within seconds.</td></tr>
+    <tr><td>Process Control</td><td>Remote kill a test process (e.g., Notepad).</td><td>Process is terminated; success message appears on dashboard.</td></tr>
+    <tr><td>Threat Detection</td><td>Rename file to `.encrypted` or create `.sh` in Downloads.</td><td>Critical/High alert is generated and surfaces on UI.</td></tr>
+    <tr><td>Correlation Logic</td><td>Start `nc` process followed by modifying `/etc/hosts`.</td><td>**CRITICAL Correlated Attack** alert is triggered.</td></tr>
+    <tr><td>Auto-Mitigation</td><td>Trigger a Honeypot breach event.</td><td>Agent is automatically marked as **ISOLATED**; isolation command sent to agent.</td></tr>
+    <tr><td>Persistence</td><td>Restart backend/agent.</td><td>Historical data remains available; agent re-registers successfully.</td></tr>
+    <tr><td>Self-Integrity</td><td>Agent binary is modified or tampered with.</td><td>Agent integrity hash changes; alert triggered (future enhancement).</td></tr>
+  </table>
+
+  <h2>15. Expected Outcomes</h2>
+  <ul>
+    <li>Drastic reduction in detection-to-response time through real-time alerting and remote remediation.</li>
+    <li>Improved security visibility across the entire fleet of organization endpoints.</li>
+    <li>Automated prevention of ransomware spread through intelligent monitoring and SOAR.</li>
+    <li>Enhanced forensic capabilities through a comprehensive historical telemetry database.</li>
+    <li>Low-impact security monitoring that does not degrade system performance.</li>
+  </ul>
+
+  <h2>16. Limitations</h2>
+  <ul>
+    <li>Initial version focus on macOS/Linux; Windows support requires further testing of specific system APIs.</li>
+    <li>Detection is currently pattern-based; behavioral AI models are planned for future releases.</li>
+    <li>Network isolation depends on OS-level firewall controls which may be bypassed by advanced malware.</li>
+    <li>Relies on persistent network connectivity between agent and backend.</li>
+  </ul>
+
+  <h2>17. Future Scope</h2>
+  <ul>
+    <li><strong>Behavioral AI Models:</strong> Integrating Machine Learning models for anomaly-based detection of zero-day threats.</li>
+    <li><strong>Kernel-Level Monitoring:</strong> Implementing eBPF or macOS Endpoint Security extensions for deeper system call visibility.</li>
+    <li><strong>SIEM Integration:</strong> Exporting telemetry to external platforms like Splunk or ELK stack.</li>
+    <li><strong>Mobile Endpoint Support:</strong> Extending monitoring to organizational mobile devices.</li>
+    <li><strong>Role-Based Access Control (RBAC):</strong> Granular permissions for analysts, administrators, and CISO roles.</li>
+    <li><strong>Automated Forensic Capture:</strong> Automatically capturing system snapshots and memory dumps upon critical threat detection.</li>
+  </ul>
+
+  <h2>18. Conclusion</h2>
+  <p>ImmunoOrg-V2 represents a significant advancement in endpoint security for the modern era. By combining high-performance system monitoring with centralized, real-time management and a focus on proactive mitigation, it provides organizations with the tools necessary to defend against sophisticated cyber threats. Its robust architecture and modern design make it both a practical security tool and a powerful platform for research into next-generation EDR capabilities. The project successfully demonstrates that security can be both highly effective and highly observable without sacrificing performance.</p>
+
+  <h2>19. References</h2>
+  <ol>
+    <li>ImmunoOrg-V2 Technical Documentation and README, 2026.</li>
+    <li>Rust Programming Language Documentation (Tokio, Notify, Sysinfo).</li>
+    <li>Node.js and Express Documentation.</li>
+    <li>Redis and Socket.io Architectural Best Practices.</li>
+    <li>NIST Guide to Endpoint Detection and Response (EDR) Systems.</li>
+  </ol>
+</body>
+</html>

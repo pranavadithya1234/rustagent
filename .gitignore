@@ -1,0 +1,27 @@
+# Large files (exceed GitHub's 100MB limit)
+*.zip
+*.db
+
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Build output (keep dist if you want to deploy from it — remove this line if so)
+# dist/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.immunoorg.agent</string>
+    <key>ProgramArguments</key>
+    <array>
+        <!-- The path to the rust-agent executable will be replaced by the install script -->
+        <string>/usr/local/bin/rust-agent</string>
+    </array>
+    <!-- Run at Load (Start when system boots) -->
+    <key>RunAtLoad</key>
+    <true/>
+    <!-- Keep Alive (Restart automatically if killed) -->
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/var/log/immunoorg-agent.log</string>
+    <key>StandardErrorPath</key>
+    <string>/var/log/immunoorg-agent.err</string>
+</dict>
+</plist>
